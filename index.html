@@ -1,0 +1,376 @@
+<div class="nh-unique-block">
+  <style>
+    .nh-unique-block .nh-container {
+      font-family: "Poppins", sans-serif;
+      background-color: transparent;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .nh-unique-block .nh-product-options {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 60px; /* increased to accommodate the bigger badge */
+    }
+
+    .nh-unique-block .nh-product-card {
+      position: relative;
+      border-radius: 0;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .nh-unique-block .nh-featured {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+      background-color: #faebc8;
+    }
+
+    .nh-unique-block .nh-badge {
+      position: absolute;
+      top: -28px;
+      right: -28px;
+      width: 95px;
+      height: 95px;
+      background-color: #004175;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.2;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+      padding: 6px;
+      white-space: normal;
+    }
+
+    .nh-unique-block .nh-product-image {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .nh-unique-block .nh-product-image img {
+      width: 100%;
+      max-height: 240px;
+      object-fit: cover;
+      border-radius: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .nh-unique-block .nh-product-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #004175;
+    }
+
+    .nh-unique-block .nh-select-flavor {
+      color: #004175;
+      font-size: large;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .nh-unique-block .nh-flavor-options {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      margin: 0 auto 20px;
+      width: fit-content;
+      gap: 2px;
+    }
+
+    .nh-unique-block .nh-radio {
+      accent-color: #004175;
+    }
+
+    .nh-unique-block .nh-price {
+      margin-top: -10px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #004175;
+    }
+
+    .nh-unique-block .nh-total {
+      margin-top: -40px;
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: #004175;
+    }
+
+    .nh-unique-block .nh-freebies {
+      font-weight: bold;
+      font-size: large;
+      line-height: 1.4;
+      color: #8d1001;
+    }
+
+    .nh-unique-block .nh-buy-button {
+      background: linear-gradient(to bottom, #f5c04f, #f2a20c, #e19009);
+      color: white;
+      padding: 18px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+    }
+
+    .nh-unique-block .nh-buy-button:hover {
+      background-color: #c97f08;
+    }
+
+    .nh-unique-block .nh-divider {
+      border: none;
+      height: 2px;
+      background-color: #004175;
+      width: 80%;
+      margin: 10px auto;
+    }
+  </style>
+
+  <div class="nh-container">
+    <div class="nh-product-options">
+      <!-- 1 Jar -->
+      <div class="nh-product-card">
+        <h2 class="nh-product-title">1 Jar</h2>
+        <div class="nh-product-image">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_1.png?v=1743000499"
+            data-flavor-mixed-berry="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_1.png?v=1743000499"
+            data-flavor-tangerine="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Tangerine_1.png?v=1743000499"
+            data-flavor-peach-mango="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Peach_Mango_1.png?v=1743000499"
+            alt="1 Jar"
+          />
+        </div>
+        <p class="nh-select-flavor">Select Flavor:</p>
+        <div class="nh-flavor-options">
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-1"
+              value="Mixed Berry"
+              checked
+            />
+            Mixed Berry</label
+          >
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-1"
+              value="Tangerine"
+            />
+            Tangerine</label
+          >
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-1"
+              value="Peach Mango"
+            />
+            Peach Mango</label
+          >
+        </div>
+        <p class="nh-price">$43</p>
+        <p class="nh-total">
+          TOTAL $43
+          <span class="nh-original-price" style="text-decoration: line-through"
+            >$50</span
+          >
+        </p>
+        <hr class="nh-divider" />
+        <p class="nh-freebies">+ FREE SHIPPING<br />+ FREE FUNNEL</p>
+        <button class="nh-buy-button">BUY NOW 14% OFF</button>
+      </div>
+
+      <!-- 6 Jars -->
+      <div class="nh-product-card nh-featured">
+        <div class="nh-badge">Most Popular</div>
+        <h2 class="nh-product-title">6 Jars</h2>
+        <div class="nh-product-image">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Mixed_berry_1.png?v=1743020802"
+            data-flavor-mixed-berry="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Mixed_berry_1.png?v=1743020802"
+            data-flavor-tangerine="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Tangerine.png?v=1743020802"
+            data-flavor-peach-mango="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Peach_Mango.png?v=1743020889"
+            alt="6 Jars"
+          />
+        </div>
+        <p class="nh-select-flavor">Select Flavor:</p>
+        <div class="nh-flavor-options">
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-6"
+              value="Mixed Berry"
+              checked
+            />
+            Mixed Berry</label
+          >
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-6"
+              value="Tangerine"
+            />
+            Tangerine</label
+          >
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-6"
+              value="Peach Mango"
+            />
+            Peach Mango</label
+          >
+        </div>
+        <p class="nh-price">
+          $28
+          <span class="unit" style="font-size: 0.8rem; font-weight: normal"
+            >each</span
+          >
+        </p>
+        <p class="nh-total">
+          TOTAL $168
+          <span class="nh-original-price" style="text-decoration: line-through"
+            >$300</span
+          >
+        </p>
+        <hr class="nh-divider" />
+        <p class="nh-freebies">+ FREE SHIPPING<br />+ FREE FUNNEL</p>
+        <button class="nh-buy-button">BUY NOW 44% OFF</button>
+      </div>
+
+      <!-- 3 Jars -->
+      <div class="nh-product-card">
+        <h2 class="nh-product-title">3 Jars</h2>
+        <div class="nh-product-image">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_3.png?v=1743000349"
+            data-flavor-mixed-berry="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_3.png?v=1743000349"
+            data-flavor-tangerine="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Tangerine_3.png?v=1743000349"
+            data-flavor-peach-mango="https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Peach_Mango_3.png?v=1743000349"
+            alt="3 Jars"
+          />
+        </div>
+        <p class="nh-select-flavor">Select Flavor:</p>
+        <div class="nh-flavor-options">
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-3"
+              value="Mixed Berry"
+              checked
+            />
+            Mixed Berry</label
+          >
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-3"
+              value="Tangerine"
+            />
+            Tangerine</label
+          >
+          <label
+            ><input
+              type="radio"
+              class="nh-radio"
+              name="flavor-3"
+              value="Peach Mango"
+            />
+            Peach Mango</label
+          >
+        </div>
+        <p class="nh-price">
+          $33
+          <span class="unit" style="font-size: 0.8rem; font-weight: normal"
+            >each</span
+          >
+        </p>
+        <p class="nh-total">
+          TOTAL $99
+          <span class="nh-original-price" style="text-decoration: line-through"
+            >$150</span
+          >
+        </p>
+        <hr class="nh-divider" />
+        <p class="nh-freebies">+ FREE SHIPPING<br />+ FREE FUNNEL</p>
+        <button class="nh-buy-button">BUY NOW 34% OFF</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.currentScript.closest(".nh-unique-block");
+      const radios = root.querySelectorAll(".nh-radio");
+
+      radios.forEach((radio) => {
+        radio.addEventListener("change", (event) => {
+          const selectedFlavor = event.target.value;
+          const flavorKey = selectedFlavor.toLowerCase().replace(/\s+/g, "-");
+
+          // Update all radios across all cards
+          radios.forEach((r) => {
+            r.checked = r.value === selectedFlavor;
+          });
+
+          // Update all product images across cards
+          const allCards = root.querySelectorAll(".nh-product-card");
+
+          allCards.forEach((card) => {
+            const img = card.querySelector(".nh-product-image img");
+            const newSrc = img.getAttribute(`data-flavor-${flavorKey}`);
+            if (newSrc && img.src !== newSrc) {
+              img.style.opacity = 0;
+              setTimeout(() => {
+                img.src = newSrc;
+                img.onload = () => (img.style.opacity = 1);
+              }, 100);
+            }
+          });
+        });
+      });
+
+      // Preload all images for smoother switching
+      const preload = [
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_1.png?v=1743000499",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Tangerine_1.png?v=1743000499",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Peach_Mango_1.png?v=1743000499",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Mixed_berry_1.png?v=1743020802",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Tangerine.png?v=1743020802",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/6_Peach_Mango.png?v=1743020889",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_3.png?v=1743000349",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Tangerine_3.png?v=1743000349",
+        "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Peach_Mango_3.png?v=1743000349",
+      ];
+
+      preload.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    })();
+  </script>
+</div>
