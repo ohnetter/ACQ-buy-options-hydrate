@@ -32,7 +32,7 @@
 
     .nh-unique-block .nh-featured {
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-      background-color: #faebc8;
+      transition: background-color 0.3s ease;
     }
 
     .nh-unique-block .nh-badge {
@@ -176,6 +176,7 @@
         max-width: 100%;
         height: auto;
         object-fit: contain;
+        transition: opacity 0.2s ease;
       }
 
       .nh-unique-block .nh-badge {
@@ -384,8 +385,24 @@
           });
         });
 
+        const flavorBackgrounds = {
+          "mixed-berry": "#fdeaea",
+          tangerine: "#fef0c9",
+          "peach-mango": "#feedd1",
+        };
+
         function updateFlavor(flavor) {
           const flavorKey = flavor.toLowerCase().replace(/\s+/g, "-");
+
+          // Update 6-Jars background if card has .nh-featured
+          cards.forEach((card) => {
+            if (card.classList.contains("nh-featured")) {
+              const bgColor = flavorBackgrounds[flavorKey];
+              if (bgColor) {
+                card.style.backgroundColor = bgColor;
+              }
+            }
+          });
 
           cards.forEach((card) => {
             // Check the correct radio
