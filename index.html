@@ -156,7 +156,7 @@
         max-width: 100%;
         height: auto;
         object-fit: contain;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.5s ease;
       }
 
       .nh-unique-block .nh-badge {
@@ -403,7 +403,7 @@
             radio.name = flavorName;
           });
 
-          // ✅ Add Checkout Champ URL click handler
+          // ✅ Checkout button handler
           const button = card.querySelector(".nh-buy-button");
           button.addEventListener("click", () => {
             const selectedFlavor = [...radios]
@@ -432,7 +432,7 @@
         function updateFlavor(flavor) {
           const flavorKey = flavor.toLowerCase().replace(/\s+/g, "-");
 
-          // Update 6-Jars background if card has .nh-featured
+          // Update featured background
           cards.forEach((card) => {
             if (card.classList.contains("nh-featured")) {
               const bgColor = flavorBackgrounds[flavorKey];
@@ -442,27 +442,30 @@
             }
           });
 
+          // Update each card's image and radio state
           cards.forEach((card) => {
-            // Check the correct radio
             const radios = card.querySelectorAll(".nh-radio");
             radios.forEach((radio) => {
               radio.checked = radio.value === flavor;
             });
 
-            // Update image
             const img = card.querySelector(".nh-product-image img");
             const newSrc = img.getAttribute(`data-flavor-${flavorKey}`);
             if (newSrc && img.src !== newSrc) {
               img.style.opacity = 0;
               setTimeout(() => {
                 img.src = newSrc;
-                img.onload = () => (img.style.opacity = 1);
-              }, 100);
+                img.onload = () => {
+                  requestAnimationFrame(() => {
+                    img.style.opacity = 1;
+                  });
+                };
+              }, 30); // Fast but smooth transition
             }
           });
         }
 
-        // Add change listeners within this block
+        // Flavor change handler
         root.querySelectorAll(".nh-radio").forEach((radio) => {
           radio.addEventListener("change", (e) => {
             if (e.target.checked) {
@@ -472,12 +475,10 @@
         });
 
         // Set default flavor
-        setTimeout(() => {
-          updateFlavor("Mixed Berry");
-        }, 100);
+        updateFlavor("Mixed Berry");
       });
 
-    // ✅ Image Preload
+    // ✅ Preload images for smooth experience
     if (!window.nhPreloaded) {
       const preload = [
         "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/1_Mixed_Berry.png?v=1743531981",
