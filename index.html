@@ -1,11 +1,13 @@
-<div class="nh-unique-block">
+<div class="nh-unique-block" data-block-id="block-1">
   <style>
     .nh-unique-block .nh-container {
+      max-width: 1140px;
       font-family: "Poppins", sans-serif;
       background-color: transparent;
-      margin: 0;
+      margin: 0 auto; /* ✅ This centers the container */
       padding: 20px;
       text-align: center;
+      box-sizing: border-box;
     }
 
     .nh-unique-block .nh-product-options {
@@ -13,7 +15,7 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      margin-top: 60px; /* increased to accommodate the bigger badge */
+      margin-top: 60px;
     }
 
     .nh-unique-block .nh-product-card {
@@ -22,7 +24,9 @@
       background: white;
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      flex: 1 1 280px; /* responsive sizing */
+      max-width: 340px; /* prevents stretching */
+      min-width: 260px; /* prevents squishing */
       text-align: center;
     }
 
@@ -109,7 +113,7 @@
     }
 
     .nh-unique-block .nh-total {
-      margin-top: -40px;
+      margin-top: 5px; /* changed from -40px */
       font-size: 1.2rem;
       font-weight: normal;
       color: #004175;
@@ -146,6 +150,39 @@
       background-color: #004175;
       width: 80%;
       margin: 10px auto;
+    }
+
+    @media screen and (max-width: 600px) {
+      .nh-unique-block .nh-product-options {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .nh-unique-block .nh-product-card {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto 20px;
+      }
+
+      .nh-unique-block .nh-product-image {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nh-unique-block .nh-product-image img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .nh-unique-block .nh-badge {
+        top: -20px;
+        right: -20px;
+        transform: scale(0.85);
+      }
     }
   </style>
 
@@ -330,24 +367,34 @@
   </div>
 
   <script>
-    (function () {
-      const root = document.currentScript.closest(".nh-unique-block");
-      const radios = root.querySelectorAll(".nh-radio");
+    document
+      .querySelectorAll(".nh-unique-block")
+      .forEach((root, blockIndex) => {
+        if (root.dataset.nhInitialized) return;
+        root.dataset.nhInitialized = "true";
 
-      radios.forEach((radio) => {
-        radio.addEventListener("change", (event) => {
-          const selectedFlavor = event.target.value;
-          const flavorKey = selectedFlavor.toLowerCase().replace(/\s+/g, "-");
+        const cards = root.querySelectorAll(".nh-product-card");
 
-          // Update all radios across all cards
-          radios.forEach((r) => {
-            r.checked = r.value === selectedFlavor;
+        // Dynamically rename radio groups so they're scoped per block
+        cards.forEach((card, cardIndex) => {
+          const radios = card.querySelectorAll(".nh-radio");
+          const flavorName = `flavor-${blockIndex}-${cardIndex}`;
+          radios.forEach((radio) => {
+            radio.name = flavorName;
           });
+        });
 
-          // Update all product images across cards
-          const allCards = root.querySelectorAll(".nh-product-card");
+        function updateFlavor(flavor) {
+          const flavorKey = flavor.toLowerCase().replace(/\s+/g, "-");
 
-          allCards.forEach((card) => {
+          cards.forEach((card) => {
+            // Check the correct radio
+            const radios = card.querySelectorAll(".nh-radio");
+            radios.forEach((radio) => {
+              radio.checked = radio.value === flavor;
+            });
+
+            // Update image
             const img = card.querySelector(".nh-product-image img");
             const newSrc = img.getAttribute(`data-flavor-${flavorKey}`);
             if (newSrc && img.src !== newSrc) {
@@ -358,10 +405,25 @@
               }, 100);
             }
           });
+        }
+
+        // Add change listeners within this block
+        root.querySelectorAll(".nh-radio").forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            if (e.target.checked) {
+              updateFlavor(e.target.value);
+            }
+          });
         });
+
+        // Set default flavor
+        setTimeout(() => {
+          updateFlavor("Mixed Berry");
+        }, 100);
       });
 
-      // Preload all images for smoother switching
+    // ✅ Image Preload
+    if (!window.nhPreloaded) {
       const preload = [
         "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Mixed_Berry_1.png?v=1743000499",
         "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Tangerine_1.png?v=1743000499",
@@ -373,11 +435,11 @@
         "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Tangerine_3.png?v=1743000349",
         "https://cdn.shopify.com/s/files/1/0014/0158/5725/files/Peach_Mango_3.png?v=1743000349",
       ];
-
       preload.forEach((src) => {
         const img = new Image();
         img.src = src;
       });
-    })();
+      window.nhPreloaded = true;
+    }
   </script>
 </div>
