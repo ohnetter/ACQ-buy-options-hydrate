@@ -31,31 +31,9 @@
     }
 
     .nh-unique-block .nh-featured {
+      background-color: #fdeaea; /* mixed berry pink */
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
       transition: background-color 0.3s ease;
-    }
-
-    .nh-unique-block .nh-badge {
-      position: absolute;
-      top: -28px;
-      right: -28px;
-      width: 95px;
-      height: 95px;
-      background-color: #004175;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2rem;
-      font-weight: 800;
-      text-align: center;
-      line-height: 1.2;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      z-index: 10;
-      padding: 6px;
-      white-space: normal;
     }
 
     .nh-unique-block .nh-product-image {
@@ -164,6 +142,7 @@
         width: 100%;
         max-width: 340px;
         margin: 0 auto 20px;
+        order: 0;
       }
 
       .nh-unique-block .nh-product-image {
@@ -185,13 +164,24 @@
         right: -20px;
         transform: scale(0.85);
       }
+
+      /* 👇 These only apply on mobile now */
+      .nh-product-card.card-6 {
+        order: 1;
+      }
+      .nh-product-card.card-3 {
+        order: 2;
+      }
+      .nh-product-card.card-1 {
+        order: 3;
+      }
     }
   </style>
 
   <div class="nh-container">
     <div class="nh-product-options">
       <!-- 1 Jar -->
-      <div class="nh-product-card">
+      <div class="nh-product-card card-1">
         <h2 class="nh-product-title">1 Jar</h2>
         <div class="nh-product-image">
           <img
@@ -241,13 +231,23 @@
           >
         </p>
         <hr class="nh-divider" />
-        <p class="nh-freebies">+ FREE SHIPPING<br />+ FREE FUNNEL</p>
-        <button class="nh-buy-button">BUY NOW 14% OFF</button>
+        <p class="nh-freebies">
+          + FREE SHIPPING<br />
+          + FREE FUNNEL<br />
+          <span style="visibility: hidden">+ FREE TUMBLER</span>
+        </p>
+        <button
+          class="nh-buy-button"
+          data-checkout-mixed-berry="https://checkoutchamp.com/mixed-berry-1-url"
+          data-checkout-tangerine="https://checkoutchamp.com/tangerine-1-url"
+          data-checkout-peach-mango="https://checkoutchamp.com/peach-mango-1-url"
+        >
+          BUY NOW 14% OFF
+        </button>
       </div>
 
       <!-- 6 Jars -->
-      <div class="nh-product-card nh-featured">
-        <div class="nh-badge">Most Popular</div>
+      <div class="nh-product-card nh-featured card-6">
         <h2 class="nh-product-title">6 Jars</h2>
         <div class="nh-product-image">
           <img
@@ -302,12 +302,21 @@
           >
         </p>
         <hr class="nh-divider" />
-        <p class="nh-freebies">+ FREE SHIPPING<br />+ FREE FUNNEL</p>
-        <button class="nh-buy-button">BUY NOW 44% OFF</button>
+        <p class="nh-freebies">
+          + FREE SHIPPING<br />+ FREE TUMBLER<br />+ FREE FUNNEL
+        </p>
+        <button
+          class="nh-buy-button"
+          data-checkout-mixed-berry="https://checkoutchamp.com/mixed-berry-6-url"
+          data-checkout-tangerine="https://checkoutchamp.com/tangerine-6-url"
+          data-checkout-peach-mango="https://checkoutchamp.com/peach-mango-6-url"
+        >
+          BUY NOW 44% OFF
+        </button>
       </div>
 
       <!-- 3 Jars -->
-      <div class="nh-product-card">
+      <div class="nh-product-card card-3">
         <h2 class="nh-product-title">3 Jars</h2>
         <div class="nh-product-image">
           <img
@@ -362,8 +371,17 @@
           >
         </p>
         <hr class="nh-divider" />
-        <p class="nh-freebies">+ FREE SHIPPING<br />+ FREE FUNNEL</p>
-        <button class="nh-buy-button">BUY NOW 34% OFF</button>
+        <p class="nh-freebies">
+          + FREE SHIPPING<br />+ FREE TUMBLER<br />+ FREE FUNNEL
+        </p>
+        <button
+          class="nh-buy-button"
+          data-checkout-mixed-berry="https://checkoutchamp.com/mixed-berry-3-url"
+          data-checkout-tangerine="https://checkoutchamp.com/tangerine-3-url"
+          data-checkout-peach-mango="https://checkoutchamp.com/peach-mango-3-url"
+        >
+          BUY NOW 34% OFF
+        </button>
       </div>
     </div>
   </div>
@@ -383,6 +401,25 @@
           const flavorName = `flavor-${blockIndex}-${cardIndex}`;
           radios.forEach((radio) => {
             radio.name = flavorName;
+          });
+
+          // ✅ Add Checkout Champ URL click handler
+          const button = card.querySelector(".nh-buy-button");
+          button.addEventListener("click", () => {
+            const selectedFlavor = [...radios]
+              .find((r) => r.checked)
+              ?.value?.toLowerCase();
+            const datasetKey =
+              "checkout" +
+              selectedFlavor.charAt(0).toUpperCase() +
+              selectedFlavor.slice(1).replace(/\s+/g, "");
+            const checkoutUrl = button.dataset[datasetKey];
+
+            if (checkoutUrl) {
+              window.location.href = checkoutUrl;
+            } else {
+              alert("Checkout URL not found for this option.");
+            }
           });
         });
 
